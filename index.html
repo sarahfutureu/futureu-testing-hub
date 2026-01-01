@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standardized Testing Hub - FutureU</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sage: #7a9d7e;
+            --sage-light: #a5c9a8;
+            --sage-dark: #5a7d5e;
+            --cream: #faf7f2;
+            --warm-white: #ffffff;
+            --charcoal: #2d3436;
+            --soft-gray: #636e72;
+            --accent-coral: #ff6b6b;
+            --accent-gold: #f0a500;
+            --success: #51cf66;
+            --shadow: rgba(45, 52, 54, 0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #ffffff 100%);
+            color: var(--charcoal);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+            color: var(--warm-white);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .for-grades {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-style: italic;
+        }
+        
+        .stress-note {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            font-size: 1.05rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-tab {
+            background: white;
+            border: 2px solid var(--sage-light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--charcoal);
+            font-size: 0.95rem;
+        }
+        
+        .nav-tab:hover {
+            background: var(--sage-light);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .nav-tab.active {
+            background: var(--sage);
+            color: white;
+            border-color: var(--sage);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 20px var(--shadow);
+            border: 1px solid rgba(122, 157, 126, 0.1);
+        }
+        
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            color: var(--sage-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--sage-light), var(--sage));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .accordion {
+            margin-top: 1.5rem;
+        }
+        
+        .accordion-item {
+            border: 2px solid var(--cream);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-item:hover {
+            border-color: var(--sage-light);
+        }
+        
+        .accordion-header {
+            background: linear-gradient(135deg, var(--cream) 0%, #f5f2ed 100%);
+            padding: 1.3rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-header:hover {
+            background: linear-gradient(135deg, var(--sage-light) 0%, var(--sage) 100%);
+            color: white;
+        }
+        
+        .accordion-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-item.active .accordion-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-item.active .accordion-header {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+            color: white;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        
+        .accordion-inner {
+            padding: 1.5rem;
+            background: white;
+        }
+        
+        h3 {
+            font-family: 'DM Serif Display', serif;
+            color: var(--sage-dark);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        h4 {
+            color: var(--sage);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 1.2rem 0 0.6rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+            border-left: 4px solid var(--accent-gold);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .highlight-box strong {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffd6d6 100%);
+            border-left: 4px solid var(--accent-coral);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #e6f9e6 0%, #d6f5d6 100%);
+            border-left: 4px solid var(--success);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .checklist {
+            background: white;
+            border: 2px solid var(--sage-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--cream);
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--sage);
+            border-radius: 6px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checkbox:hover {
+            background: var(--sage-light);
+        }
+        
+        ul, ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+            padding-left: 0.3rem;
+        }
+        
+        strong {
+            color: var(--sage-dark);
+            font-weight: 700;
+        }
+        
+        .grade-badge {
+            display: inline-block;
+            background: var(--sage);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .test-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .test-card {
+            background: linear-gradient(135deg, var(--cream) 0%, #f5f2ed 100%);
+            border: 2px solid var(--sage-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .test-card h4 {
+            color: var(--sage-dark);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-family: 'DM Serif Display', serif;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-button {
+            background: white;
+            color: var(--sage-dark);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .test-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .hero {
+                padding: 2.5rem 1.5rem 2rem;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--sage-light);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0.5rem;
+            width: 16px;
+            height: 16px;
+            background: var(--sage);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        
+        .timeline-title {
+            font-weight: 700;
+            color: var(--sage-dark);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Standardized Testing Hub</h1>
+            <p class="subtitle">Your Complete Guide to PSAT, SAT, ACT & AP Exams</p>
+            <p class="for-grades">For Students Grades 9-12</p>
+            <div class="stress-note">
+                📌 This hub is designed to lower panic, not raise it. You'll find reminders throughout about protecting sleep, mental health, and your actual life while working toward your goals.
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('overview', this)">Overview</div>
+            <div class="nav-tab" onclick="showSection('timeline', this)">Timeline by Grade</div>
+            <div class="nav-tab" onclick="showSection('sat-act', this)">SAT vs ACT</div>
+            <div class="nav-tab" onclick="showSection('prep', this)">How to Study</div>
+            <div class="nav-tab" onclick="showSection('test-day', this)">Test Day</div>
+            <div class="nav-tab" onclick="showSection('anxiety', this)">Managing Anxiety</div>
+            <div class="nav-tab" onclick="showSection('scores', this)">Understanding Scores</div>
+            <div class="nav-tab" onclick="showSection('resources', this)">Resources</div>
+        </div>
+
+        <!-- OVERVIEW SECTION -->
+        <div id="overview-section" class="content-section">
+            <div class="section fade-in">
+                <h2 class="section-title">
+                    <span class="section-icon">📚</span>
+                    What's Inside This Hub
+                </h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Understanding the Tests (PSAT, SAT, ACT, AP)</span>
+                            <span class="accordion-toggle">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>Standardized tests are ONE piece of college applications—not the only piece, but one that many colleges use to compare students from different schools and backgrounds.</p>
+                                
+                                <h4>PSAT 8/9 (Usually 9th Grade)</h4>
+                                <ul>
+                                    <li>Practice test for the PSAT/NMSQT and SAT</li>
+                                    <li>Tests reading, writing, and math skills</li>
+                                    <li>Scores don't count for anything - pure practice</li>
+                                    <li>Gives you baseline to see where you're starting</li>
+                                </ul>
+
+                                <h4>PSAT/NMSQT (Usually 10th & 11th Grade)</h4>
+                                <ul>
+                                    <li>Practice test for the SAT</li>
+                                    <li>Junior year: qualifies for National Merit Scholarships (top 1%)</li>
+                                    <li>Usually taken in October</li>
+                                    <li>Scores are practice - not sent to colleges</li>
+                                </ul>
+
+                                <h4>SAT (Usually 11th & 12th Grade)</h4>
+                                <ul>
+                                    <li>College admissions test, now primarily digital</li>
+                                    <li>Sections: Reading & Writing, Math (each given in two adaptive modules)</li>
+                                    <li>Scored out of 1600 (200–800 per section)</li>
+                                    <li>Calculator allowed on all math questions</li>
+                                    <li>Offered multiple times per year nationally</li>
+                                </ul>
+
+                                <h4>ACT (Usually 11th & 12th Grade)</h4>
+                                <ul>
+                                    <li>College admissions test (alternative to SAT)</li>
+                                    <li>Tests: English, Math, Reading, Science, optional Writing</li>
+                                    <li>Scored out of 36 (composite of four sections)</li>
+                                    <li>Offered 7 times per year</li>
+                                </ul>
+
+                                <h4>AP Exams (Any Year Taking AP Classes)</h4>
+                                <ul>
+                                    <li>Tests for specific AP courses</li>
+                                    <li>Scored 1-5 (3+ typically earns college credit)</li>
+                                    <li>Taken in May after completing AP course</li>
+                                    <li>Different from SAT/ACT - tests specific course content</li>
+                                </ul>
+
+                                <div class="highlight-box">
+                                    <strong>CRITICAL TRUTH:</strong> Your test scores are ONE piece of college applications. Many colleges are now test-optional. Your GPA, activities, essays, and recommendations also matter. Test scores are not a measure of your intelligence or worth.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Who This Hub Is For</span>
+                            <span class="accordion-toggle">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <div class="grade-badge">9th Grade</div>
+                                <p>Understanding what tests are ahead (low pressure)</p>
+                                
+                                <div class="grade-badge">10th Grade</div>
+                                <p>Beginning PSAT/NMSQT and planning SAT/ACT timeline</p>
+                                
+                                <div class="grade-badge">11th Grade</div>
+                                <p>Peak testing year - SAT/ACT intensive preparation</p>
+                                
+                                <div class="grade-badge">12th Grade</div>
+                                <p>Final testing attempts and AP exam strategies</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMELINE SECTION -->
+        <div id="timeline-section" class="content-section" style="display: none;">
+            <div class="section fade-in">
+                <h2 class="section-title">
+                    <span class="section-icon">📅</span>
+                    When to Test: Timeline by Grade
+                </h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>9th Grade: Introduction Year (Low Pressure)</span>
+                            <span class="accordion-toggle">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p><strong>Focus:</strong> Building strong academic skills, light test awareness</p>
+                                
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">Fall</div>
+                                        <p>PSAT 8/9 (if your school offers it) - pure practice, no stakes</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">Year-round</div>
+                                        <p>Focus on doing well in your classes (this IS test prep)</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">Maybe</div>
+                                        <p>Take one practice SAT or ACT at home just to see format (optional)</p>
+                                    </div>
+                                </div>
+
+                                <div class="warning-box">
+                                    <strong>9TH GRADE: WHAT YOU DON'T NEED TO DO</strong>
+                                    <ul>
+                                        <li>Don't start serious test prep</li>
+                                        <li>Don't take SAT or ACT officially</li>
+                                        <li>Don't stress about scores</li>
+                                        <li>Don't compare yourself to others</li>
+                                        <li>Just build foundation and awareness</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>10th Grade: Planning & Light Prep Year</span>
+                            <span class="accordion-toggle">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p><strong>Focus:</strong> PSAT/NMSQT in October, planning for junior year testing</p>
+                                
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">August-September</div>
+                                        <p>Learn about PSAT, light review if desired</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">October</div>
+                                        <p>Take PSAT/NMSQT (practice for SAT, National Merit consideration)</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">November</div>
+                                        <p>Receive PSAT scores, understand what they mean</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">December-January</div>
+                                        <p>Learn about SAT vs ACT, decide which to take</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">Spring</div>
+                                        <p>Maybe take practice SAT and ACT to see which feels better</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">Spring/Summer</div>
+                                        <p>Light prep or diagnostic tests if desired</p>
+                                    </div>
+                                </div>
+
+                                <div class="success-box">
+                                    <strong>10TH GRADE: MAIN GOALS</strong>
+                                    <ul>
+                                        <li>Take PSAT/NMSQT in October</li>
+                                        <li>Understand test formats and what's expected</li>
+                                        <li>Decide on SAT vs ACT (or both)</li>
+                                        <li>Build strong math and reading skills in classes</li>
+                                        <li>Maybe start very light prep late in year</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>11th Grade: Peak Testing Year ⭐</span>
+                            <span class="accordion-toggle">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p><strong>Focus:</strong> Official SAT/ACT testing, multiple attempts, solid scores before senior year</p>
+                                
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">August</div>
+                                        <p>Some students take first official SAT or ACT</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">August-September</div>
+                                        <p>Start serious test prep (3-6 months before first test)</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">October</div>
+                                        <p>PSAT/NMSQT (last chance for National Merit)</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">Fall/Winter</div>
+                                        <p>First official SAT or ACT attempt (Dec, March common)</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">Spring</div>
+                                        <p>Second SAT or ACT attempt (April, May, June)</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">May</div>
+                                        <p>AP Exams if taking AP classes</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">Summer</div>
+                                        <p>Possible third attempt if needed</p>
+                                    </div>
+                                </div>
+
+                                <div class="highlight-box">
+                                    <strong>11TH GRADE: MAIN GOALS</strong>
+                                    <ul>
+                                        <li>Take SAT or ACT 2-3 times to get your best score</li>
+                                        <li>Ideally have solid scores by end of junior year</li>
+                                        <li>Take PSAT/NMSQT in October</li>
+                                        <li>Take AP exams in May if in AP classes</li>
+                                        <li>Balance testing with schoolwork, activities, and mental health</li>
+                                    </ul>
+                                    <p><em>Your test plan should fit around your life, not replace it. Scores matter, but so do sleep, mood, and not hating junior year.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>12th Grade: Final Attempts & AP Focus</span>
+                            <span class="accordion-toggle">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p><strong>Focus:</strong> Final SAT/ACT if needed, AP exams, then closure on testing</p>
+                                
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">August-September</div>
+                                        <p>Final SAT/ACT attempt if needed</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">October</div>
+                                        <p>Last SAT for Early Decision/Early Action deadlines</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">November</div>
+                                        <p>Last SAT for most Regular Decision deadlines</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">December</div>
+                                        <p>Final SAT/ACT opportunity for Regular Decision</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">January-April</div>
+                                        <p>Testing season is OVER, focus on applications and decisions</p>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-title">May</div>
+                                        <p>AP Exams (final push)</p>
+                                    </div>
+                                </div>
+
+                                <div class="success-box">
+                                    <strong>12TH GRADE: MAIN GOALS</strong>
+                                    <ul>
+                                        <li>Final retakes in Aug-Dec if needed</li>
+                                        <li>After that: STOP testing, focus on applications</li>
+                                        <li>Take AP exams in May</li>
+                                        <li>Remember: test scores are submitted, move on to other parts of applications</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAT vs ACT SECTION -->
+        <div id="sat-act-section" class="content-section" style="display: none;">
+            <div class="section fade-in">
+                <h2 class="section-title">
+                    <span class="section-icon">⚖️</span>
+                    SAT vs ACT: Which Test Should You Take?
+                </h2>
+                
+                <p>The short answer: <strong>they're very similar and colleges accept both equally.</strong></p>
+
+                <div class="test-comparison">
+                    <div class="test-card">
+                        <h4>SAT Overview</h4>
+                        <ul>
+                            <li><strong>Time:</strong> About 2 hours 14 minutes</li>
+                            <li><strong>Sections:</strong> Reading & Writing, Math</li>
+                            <li><strong>Score:</strong> Out of 1600</li>
+                            <li><strong>Pacing:</strong> Slightly more time per question</li>
+                            <li><strong>Math:</strong> Calculator allowed on all questions</li>
+                            <li><strong>Style:</strong> More reasoning-based, can feel "trickier"</li>
+                        </ul>
+                    </div>
+
+                    <div class="test-card">
+                        <h4>ACT Overview</h4>
+                        <ul>
+                            <li><strong>Time:</strong> 2 hours 55 minutes (without Writing)</li>
+                            <li><strong>Sections:</strong> English, Math, Reading, Science</li>
+                            <li><strong>Score:</strong> Out of 36</li>
+                            <li><strong>Pacing:</strong> Faster pace, less time per question</li>
+                            <li><strong>Math:</strong> Calculator allowed throughout</li>
+                            <li><strong>Style:</strong> More straightforward, tests knowledge directly</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>How to Decide Which Test to Take</span>
+                            <span class="accordion-toggle">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p><strong>Here's the best way to choose:</strong></p>
+                                <ol>
+                                    <li>Take a full-length practice test of BOTH (free online)</li>
+                                    <li>Score both tests</li>
+                                    <li>Compare:
+                                        <ul>
+                                            <li>Which score is higher relative to that test's scale?</li>
+                                            <li>Which test FELT better to you?</li>
+                                            <li>Did you run out of time on one more than the other?</li>
+                                            <li>Did one test format match your strengths better?</li>
+                                        </ul>
+                                    </li>
+                                    <li>Choose the one where you scored better OR felt more comfortable</li>
+                                    <li>You can also take both if you want (some students do)</li>
+                                </ol>
+
+                                <div class="highlight-box">
+                                    <strong>IMPORTANT NOTES</strong>
+                                    <ul>
+                                        <li>Colleges accept SAT and ACT equally - there's no "better" test</li>
+                                        <li>You don't have to decide in 9th or 10th grade</li>
+                                        <li>Take practice tests of both before committing</li>
+                                        <li>Most students focus on one test, but taking both is fine</li>
+                                        <li>Your PSAT score can give you insight into SAT performance</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PREP SECTION (Placeholder) -->
+        <div id="prep-section" class="content-section" style="display: none;">
+            <div class="section fade-in">
+                <h2 class="section-title">
+                    <span class="section-icon">📖</span>
+                    How to Study Effectively
+                </h2>
+                <p>Content coming soon! This section will cover study strategies, prep timelines, and resources.</p>
+            </div>
+        </div>
+
+        <!-- TEST DAY SECTION (Placeholder) -->
+        <div id="test-day-section" class="content-section" style="display: none;">
+            <div class="section fade-in">
+                <h2 class="section-title">
+                    <span class="section-icon">📝</span>
+                    Test Day Preparation
+                </h2>
+                <p>Content coming soon! This section will cover what to expect and how to prepare for test day.</p>
+            </div>
+        </div>
+
+        <!-- ANXIETY SECTION (Placeholder) -->
+        <div id="anxiety-section" class="content-section" style="display: none;">
+            <div class="section fade-in">
+                <h2 class="section-title">
+                    <span class="section-icon">🧘</span>
+                    Managing Test Anxiety
+                </h2>
+                <p>Content coming soon! This section will cover strategies for managing stress and anxiety.</p>
+            </div>
+        </div>
+
+        <!-- SCORES SECTION (Placeholder) -->
+        <div id="scores-section" class="content-section" style="display: none;">
+            <div class="section fade-in">
+                <h2 class="section-title">
+                    <span class="section-icon">📊</span>
+                    Understanding Your Scores
+                </h2>
+                <p>Content coming soon! This section will cover score interpretation and what to do next.</p>
+            </div>
+        </div>
+
+        <!-- RESOURCES SECTION (Placeholder) -->
+        <div id="resources-section" class="content-section" style="display: none;">
+            <div class="section fade-in">
+                <h2 class="section-title">
+                    <span class="section-icon">🔗</span>
+                    Resources & Tools
+                </h2>
+                <p>Content coming soon! This section will include links to free and paid test prep resources.</p>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h3>Want More Support with SAT/ACT Prep?</h3>
+            <p>If your teen would do better with a real person walking beside them (instead of another app they'll ignore), FutureU offers 1:1 and small group test prep with our teachers.</p>
+            <a href="#" class="cta-button">Learn More About FutureU Test Prep</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const isActive = item.classList.contains('active');
+            
+            // Close all accordion items
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.accordion-content').style.maxHeight = null;
+            });
+            
+            // Open clicked item if it wasn't already active
+            if (!isActive) {
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        }
+
+        function showSection(sectionName, clickedTab) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName + '-section');
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+            
+            // Update active tab
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            clickedTab.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
